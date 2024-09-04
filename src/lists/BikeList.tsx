@@ -44,7 +44,7 @@ const BikeList = () => {
             <tr key={idx}>
               {/* <td>IMAGE</td> */}
               <td>{bike.brand}</td>
-              <td>{bike.model}</td>
+              <td>{bike.modelName}</td>
               <td>{bike.year}</td>
               <td className="bike-list-actions">
                 <div >

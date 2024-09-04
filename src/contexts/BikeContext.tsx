@@ -8,19 +8,19 @@ export interface IBikeState {
 }
 
 export enum bikeActionType {
-  SAVE_NEW = "save_new",
-  UPDATE = "update",
-  SET_ALL = "set_all",
+  SAVE_NEW  = "save_new",
+  UPDATE    = "update",
+  SET_ALL   = "set_all",
   SET_ERROR = "set_error",
 }
 
 type BikeContextType = {
-  bikeDispatch: React.Dispatch<any>;
-  editBike: any;
-  saveBike: any;
-  deleteBike: any;
-  bikes: IBike[];
-  error: string;
+  bikeDispatch  : React.Dispatch<any>;
+  editBike      : any;
+  saveBike      : any;
+  deleteBike    : any;
+  bikes         : IBike[];
+  error         : string;
   bikeActionType: typeof bikeActionType;
 };
 

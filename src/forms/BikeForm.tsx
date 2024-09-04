@@ -18,7 +18,7 @@ type BikeFormProps = {
 // Validation schema using Yup
 const schema = yup.object().shape({
   brand: yup.string().required('Brand is required'),
-  model: yup.string().required('Model is required'),
+  modelName: yup.string().required('Model is required'),
   year: yup.string().required('Year is required'),
 });
 
@@ -30,9 +30,9 @@ const BikeForm = ({ editing }: BikeFormProps) => {
   const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      brand: '',
-      model: '',
-      year: '',
+      brand    : '',
+      modelName: '',
+      year     : '',
     },
   });
 
@@ -90,7 +90,7 @@ const BikeForm = ({ editing }: BikeFormProps) => {
               Model:
             </Label>
             <Controller
-              name="model"
+              name="modelName"
               control={control}
               render={({ field }) => (
                 <input
@@ -101,7 +101,7 @@ const BikeForm = ({ editing }: BikeFormProps) => {
                 />
               )}
             />
-            {errors.model && <p className="error-message">{errors.model.message}</p>}
+            {errors.modelName && <p className="error-message">{errors.modelName.message}</p>}
           </div>
           <div className="input-container">
             <Label styles={{ paddingLeft: "8px" }} fontSize={15}>

@@ -9,11 +9,11 @@ export interface IAppState {
   showMobileMenu: boolean;
 }
 export enum appActionType {
-  LOGIN = "login",
-  LOGOUT = "logout",
-  SIGNUP = "signup",
+  LOGIN     = "login",
+  LOGOUT    = "logout",
+  SIGNUP    = "signup",
   SHOW_MENU = "show_menu",
-  ERROR = "error",
+  ERROR     = "error",
 }
 
 type AppContextType = {

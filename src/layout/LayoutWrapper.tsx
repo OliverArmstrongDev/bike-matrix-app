@@ -9,7 +9,6 @@ import { FormContextProvider } from "../contexts/FormContext";
 import { BikeContextProvider } from "../contexts/BikeContext";
 import { AppContextProvider } from "../contexts/AppContext";
 
-
 interface LayoutWrapperProps {
   children: React.ReactNode;
 }
@@ -20,20 +19,20 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
   return (
     <BikeContextProvider>
       <FormContextProvider>
-    <AppContextProvider>
-        <BrowserRouter>
-          <div className="layout-wrapper-container">
-            {/* Header */}
-            <Header headerLeft={<Logo />} />
-            {/* Sidebar */}
-            <div className="sidebar">{<Sidebar />}</div>
-            {/* Main content */}
-            <main className="layout-content-container">{children}</main>
-            {/* Footer */}
-            {<Footer />}
-          </div>
-        </BrowserRouter>
-    </AppContextProvider>
+        <AppContextProvider>
+          <BrowserRouter>
+            <div className="layout-wrapper-container">
+              {/* Header */}
+              <Header headerLeft={<Logo />} />
+              {/* Sidebar */}
+              <div className="sidebar">{<Sidebar />}</div>
+              {/* Main content */}
+              <main className="layout-content-container">{children}</main>
+              {/* Footer */}
+              {<Footer />}
+            </div>
+          </BrowserRouter>
+        </AppContextProvider>
       </FormContextProvider>
     </BikeContextProvider>
   );

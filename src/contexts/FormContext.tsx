@@ -1,15 +1,15 @@
 import React, { createContext, useEffect, useReducer} from 'react'
 
 export interface IFormState {
-    brand: string;
-    model: string;
-    year: string;
-    image: string;
+    brand    : string;
+    modelName: string;
+    year     : string;
+    image    : string;
   }
   
   export enum formActionType {
     SET_VALUES = "set_values",
-    CLEAR_ALL = "clear_all",
+    CLEAR_ALL  = "clear_all",
   }
 
   type FormContextType = {
@@ -20,10 +20,10 @@ export interface IFormState {
    
   
   const initialFormState: IFormState = {
-    brand: "",
-    model: "",
-    year: "",
-    image: "./",
+    brand    : "",
+    modelName: "",
+    year     : "",
+    image    : "./",
   }
 
 export const FormContext = createContext<FormContextType | null>(null);
@@ -42,8 +42,6 @@ switch (type){
 export const FormContextProvider = (prop:{ children: JSX.Element | JSX.Element[]})=> {
     const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
-
-useEffect(()=>{console.log("🚀 ~ formstate: ",  formState)},[formState])
   return (
     <FormContext.Provider value={{formState, formDispatch, formActionType}}>
         {prop.children}

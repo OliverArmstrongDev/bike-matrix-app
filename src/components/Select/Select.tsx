@@ -17,7 +17,7 @@ const Select = ({onChange, id, value}: selectProps) => {
     }, []);
     
     return (
-        <select id={id} onChange={onChange} value={value}>
+        <select data-testid='year' id={id} onChange={onChange} value={value}>
             {years.map((year: string) => (
                 <option key={year} value={year}>
                     {year}
