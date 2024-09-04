@@ -1,0 +1,12 @@
+/* global variables */
+:root {
+    --header-height: 90px;
+    --sidebar-width: 260px;
+    --footer-height: 30px;
+    --footer-text-color: #000;
+    --footer-text-size: 13px;
+    --background-colour: rgb(255, 255, 255);
+    --header-colour: rgb(0, 0, 0);
+    --sidebar-colour: rgb(7, 7, 7);
+    --mobile-menu-colour: rgb(255, 255, 255);
+  }

@@ -1,0 +1,51 @@
+.bike-list-form-container {
+  width: 60vw;
+  height: fit-content;
+  background: #FFFFFF;
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 26px;
+}
+
+.bike-list-actions {
+	width: 23%;
+ div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+ }
+}
+
+table {
+	border-collapse: collapse;
+  font-family: Tahoma, Geneva, sans-serif;
+  width: 100%;
+}
+
+table td {
+	padding: 15px;
+}
+table thead td {
+	background-color: #252525;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+	border: 1px solid #54585d;
+}
+table tbody td {
+	color: #636363;
+	border: 1px solid #dddfe1;
+}
+table tbody tr {
+	background-color: #f9fafb;
+}
+table tbody tr:nth-child(odd) {
+	background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    /* Centers content in mobile */
+    .bike-list-form-container { 
+        width: 90vw;
+      }
+  }
+  

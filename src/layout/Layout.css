@@ -1,0 +1,30 @@
+.layout-wrapper-container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+
+.layout-content-container {
+    position: absolute;
+    width: Calc(100vw - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+/* Mobile breakpoints */
+
+  @media (max-width: 768px) {
+    /* Centers content in mobile */
+    .layout-content-container {
+        width: 100vw;
+        margin-left: 0;
+      }
+  }
+  
+  
+
