@@ -19,10 +19,6 @@ const Header:React.FC<Props> = ({headerRight, headerLeft}) => {
     setShowMobileMenu(!showMobileMenu);
     
   };
-
-  useEffect(() => {
-    console.log("🚀 ~ LOG: ",  showMobileMenu)
-  }, [showMobileMenu])
   
   return (
     <header className="header-container">
@@ -31,7 +27,7 @@ const Header:React.FC<Props> = ({headerRight, headerLeft}) => {
         {/* desktop header left */}
         <div className="header-left">{headerLeft}</div>
         {/* desktop header right */}
-        <div className="header-right">{error}</div>
+        <div className="header-right">{typeof error === 'string' ? error : ""}</div>
       </header>
         )
 }
