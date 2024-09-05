@@ -48,7 +48,9 @@ table tbody tr:nth-child(odd) {
 }
 
 @media (max-width: 768px) {
-    /* Centers content in mobile */
+  .bike-list-actions {
+    width: 100%;
+  }
     .bike-list-form-container { 
         width: 90vw;
       }

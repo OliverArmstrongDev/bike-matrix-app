@@ -17,7 +17,7 @@
   }
   
   .form-navigate-back{
-    margin-bottom: 2em;
+    margin-bottom: 5px;
     display: flex;
     flex-direction: column;
     gap:1em;
@@ -53,6 +53,19 @@
   .error-message{
     color: red;
     font-weight: 800;
+  }
+
+  /* Mobile breakpoints */
+
+  @media (max-width: 768px) {
+    
+    .form-container {
+        width: 100vw;
+        margin-left: 0;
+      }
+      .form-navigate-back{
+        margin-top: Calc(var(--header-height) + 10px);
+      }
   }
  
   
