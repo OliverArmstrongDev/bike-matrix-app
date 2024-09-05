@@ -17,7 +17,7 @@ export const useData = () => {
   const [token, setToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmQ3ZmRhM2Y1ZDY1MzkwODI2Y2M4YTYiLCJuYW1lIjoiSmltIiwiZW1haWwiOiJqaW1AaGVyZS5jb20iLCJpYXQiOjE3MjU0OTQ4MTAsImV4cCI6MTcyODA4NjgxMH0.cyTYitg_vzmvsTGRy6uGhtjdOIuwKvTNsx101Q97iJQ");
 
   // Hardcoding to make it easier to run as this is only for a test project
-  const url = "http://31.214.141.36:4000/api/bikes";
+  const url = "http://localhost:4000/api/bikes";
   
 
   const niceErrors = (err: any): IError => {
