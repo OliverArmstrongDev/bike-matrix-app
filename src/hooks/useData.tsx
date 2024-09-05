@@ -16,7 +16,7 @@ export const useData = () => {
   const [authData, setAuthData] = useState<IUser | null>(null);
 
   // Simulate login...
-  const [token, setToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmQ3ZmRhM2Y1ZDY1MzkwODI2Y2M4YTYiLCJuYW1lIjoiSmltIiwiZW1haWwiOiJqaW1AaGVyZS5jb20iLCJpYXQiOjE3MjU0ODYzMzksImV4cCI6MTcyNTQ5MzUzOX0.6KNHh7JgDLBUHXZbqqek3b5DPGoj-X2w5asjmVqqkrc");
+  const [token, setToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmQ3ZmRhM2Y1ZDY1MzkwODI2Y2M4YTYiLCJuYW1lIjoiSmltIiwiZW1haWwiOiJqaW1AaGVyZS5jb20iLCJpYXQiOjE3MjU0OTQ4MTAsImV4cCI6MTcyODA4NjgxMH0.cyTYitg_vzmvsTGRy6uGhtjdOIuwKvTNsx101Q97iJQ");
 
   const url = "http://localhost:4000/api/bikes";
 
