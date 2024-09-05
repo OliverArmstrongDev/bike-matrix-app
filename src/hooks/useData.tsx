@@ -18,7 +18,7 @@ export const useData = () => {
   // Simulate login...
   const [token, setToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmQ3ZmRhM2Y1ZDY1MzkwODI2Y2M4YTYiLCJuYW1lIjoiSmltIiwiZW1haWwiOiJqaW1AaGVyZS5jb20iLCJpYXQiOjE3MjU0OTQ4MTAsImV4cCI6MTcyODA4NjgxMH0.cyTYitg_vzmvsTGRy6uGhtjdOIuwKvTNsx101Q97iJQ");
 
-  const url = "http://localhost:4000/api/bikes";
+  const url = "http://bikematrix-api:4000/api/bikes";
 
   // Could also check for status code 403 instead
   const niceErrors = (err: any) => (err?.message as string).includes('Access denied') ? "Please log in again" : err;
@@ -27,7 +27,7 @@ export const useData = () => {
     setAuthLoading(true);
     try {
       if(!token) {throw new Error("Invalid auth token");}
-      const response = await fetch("http://localhost:4001/api/me", {
+      const response = await fetch("http://bikematrix-api:4001/api/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
