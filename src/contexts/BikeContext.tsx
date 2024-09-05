@@ -42,8 +42,6 @@ const BikeReducer = (state: IBikeState, action: any) => {
       return { ...state, bikes: [...updatedBikes, payload] };
     case bikeActionType.SET_ALL:
       return { ...state, bikes: payload };
-    case bikeActionType.SET_ERROR:
-      return { ...state, error: payload };
     default:
       return state;
   }
@@ -52,7 +50,7 @@ export const BikeContextProvider = (prop: {
   children: JSX.Element | JSX.Element[];
 }) => {
   const [bikeState, bikeDispatch] = useReducer(BikeReducer, InitialBikeState);
-  const { saveBike, editBike, deleteBike, saving, saveError, deleteError, data } = useData();
+  const { saveBike, editBike, deleteBike, error, data, loading } = useData();
 
   useEffect(() => {
     if (data) {
@@ -64,10 +62,7 @@ export const BikeContextProvider = (prop: {
       let updatedBike = data;
       bikeDispatch({ type: actionType, payload: updatedBike });
     }
-    if (saveError || deleteError) {
-      bikeDispatch({ type: bikeActionType.SET_ERROR, payload: saveError || deleteError });
-    }
-  }, [data, deleteError, saveError]);
+  }, [data, error, loading]);
 
   return (
     <BikeContext.Provider

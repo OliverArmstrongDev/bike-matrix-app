@@ -1,81 +1,63 @@
 import { useEffect, useState } from "react";
-import { useApp } from "./useApp";
 import { IUser } from "../models/User";
 
-export const useData = () => {
-  const [saving, setSaving] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [authLoading, setAuthLoading] = useState<boolean>(true);
-  
-  const [saveError, setSaveError] = useState<string | null>(null);
-  const [fetchError, setFetchError] = useState<string | null>(null);
-  const [deleteError, setDeleteError] = useState<string | null>(null);
-  const [authError, setAuthError] = useState<string | null>(null);
+interface IError {
+  type: string;
+  message: string;
+}
 
+export const useData = () => {
+  const initialError: IError = { type: "", message: "" };
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<IError>(initialError);
   const [data, setData] = useState<any>(null);
-  const [authData, setAuthData] = useState<IUser | null>(null);
 
   // Simulate login...
   const [token, setToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmQ3ZmRhM2Y1ZDY1MzkwODI2Y2M4YTYiLCJuYW1lIjoiSmltIiwiZW1haWwiOiJqaW1AaGVyZS5jb20iLCJpYXQiOjE3MjU0OTQ4MTAsImV4cCI6MTcyODA4NjgxMH0.cyTYitg_vzmvsTGRy6uGhtjdOIuwKvTNsx101Q97iJQ");
 
+  // Hardcoding to make it easier to run as this is only for a test project
   const url = "http://bikematrix-api:4000/api/bikes";
+  
 
-  // Could also check for status code 403 instead
-  const niceErrors = (err: any) => (err?.message as string).includes('Access denied') ? "Please log in again" : err;
-
-  const fetchLoggedInUser = async () => {
-    setAuthLoading(true);
-    try {
-      if(!token) {throw new Error("Invalid auth token");}
-      const response = await fetch("http://bikematrix-api:4001/api/me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-      if (result?.errors) {
-        throw new Error(result?.message);
-      }
-      setAuthData(result);
-      setAuthError(null);
-    } catch (err: any) {
-      setAuthError(niceErrors(err));
-    } finally {
-      setAuthLoading(false);
+  const niceErrors = (err: any): IError => {
+    if (err?.message?.includes('Access denied')) {
+      return { type: "auth", message: "Please log in again" };
     }
+    return { type: "generic", message: err?.message || "An unexpected error occurred" };
   };
 
   const fetchAllBikes = async () => {
     setLoading(true);
     try {
-      if(!token) {throw new Error("Invalid auth token");}
+      if (!token) throw new Error("Invalid auth token");
+
       const response = await fetch(url, {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-    
+
       const result = await response.json();
-      if (result?.errors) {
-        throw new Error(result?.message);
-      }
+      if (result?.errors) throw new Error(result?.message);
+
       setData(result);
-      setFetchError(null);
+      setError(initialError);
     } catch (err: any) {
-      setSaveError(niceErrors(err));
+      if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
+        setError({ type: 'network', message: 'Failed to connect to the server. Please check your network connection.' });
+      } else {
+        setError(niceErrors(err));
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  
   const saveBike = async (values: any) => {
-    setSaving(true);
+    setLoading(true);
     try {
-      if(!token) {throw new Error("Invalid auth token");}
+      if (!token) throw new Error("Invalid auth token");
+
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -86,22 +68,26 @@ export const useData = () => {
       });
 
       const result = await response.json();
-      if (result?.errors) {
-        throw new Error(result?.message);
-      }
+      if (result?.errors) throw new Error(result?.message);
+
       setData(result);
-      setSaveError(null);
+      setError(initialError);
     } catch (err: any) {
-      setSaveError(niceErrors(err));
+     if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
+        setError({ type: 'network', message: 'Failed to connect to the server. Please check your network connection.' });
+      } else {
+        setError(niceErrors(err));
+      }
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   };
 
   const editBike = async (values: any) => {
-    setSaving(true);
+    setLoading(true);
     try {
-      if(!token) {throw new Error("Invalid auth token");}
+      if (!token) throw new Error("Invalid auth token");
+
       const response = await fetch(`${url}/${values._id}`, {
         method: "PUT",
         headers: {
@@ -112,22 +98,26 @@ export const useData = () => {
       });
 
       const result = await response.json();
-      if (result?.errors) {
-        throw new Error(result?.message);
-      }
-      setData({...result, edited: true});
-      setSaveError(null);
+      if (result?.errors) throw new Error(result?.message);
+
+      setData({ ...result, edited: true });
+      setError(initialError);
     } catch (err: any) {
-      setSaveError(niceErrors(err));
+     if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
+        setError({ type: 'network', message: 'Failed to connect to the server. Please check your network connection.' });
+      } else {
+        setError(niceErrors(err));
+      }
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   };
 
   const deleteBike = async (id: number) => {
-    setSaving(true);
+    setLoading(true);
     try {
-      if(!token) {throw new Error("Invalid auth token");}
+      if (!token) throw new Error("Invalid auth token");
+
       const response = await fetch(`${url}/${id}`, {
         method: "DELETE",
         headers: {
@@ -137,16 +127,19 @@ export const useData = () => {
       });
 
       const result = await response.json();
-      if (result?.errors) {
-        throw new Error(result?.message);
-      }
+      if (result?.errors) throw new Error(result?.message);
+
       console.log("🚀 ~ deleted: ", result);
       setData(result);
-      setDeleteError(null);
+      setError(initialError);
     } catch (err: any) {
-      setDeleteError("Delete Error: " + err);
+     if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
+        setError({ type: 'network', message: 'Failed to connect to the server. Please check your network connection.' });
+      } else {
+        setError(niceErrors(err));
+      }
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   };
 
@@ -159,17 +152,10 @@ export const useData = () => {
     saveBike,
     editBike,
     deleteBike,
-    fetchLoggedInUser,
     setToken,
     token,
-    authError,
-    saving,
-    fetchError,
-    saveError,
-    deleteError,
+    error,
     data,
-    authData,
-    loading,
-    authLoading,
+    loading
   };
 };

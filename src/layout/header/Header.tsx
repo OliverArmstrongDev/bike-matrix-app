@@ -11,14 +11,16 @@ interface Props {
 }
 
 const Header:React.FC<Props> = ({headerRight, headerLeft}) => {
-  // const [showMobileMenu, setShowMobileMenu] = useState<Boolean>(false);
-  const {error} = useBike();
-  const {setShowMobileMenu, showMobileMenu} = useApp();
-
+  const [rightContent, setRightContent] = useState<String>("");
+  const {setShowMobileMenu, showMobileMenu, error, loading} = useApp();
+  
   const handleMobileMenuClick: React.MouseEventHandler<HTMLDivElement> = () => {
     setShowMobileMenu(!showMobileMenu);
     
   };
+  useEffect(() => {
+    setRightContent(error.length ? error : loading ? "Loading..." : "")
+  }, [error, loading])
   
   return (
     <header className="header-container">
@@ -27,7 +29,7 @@ const Header:React.FC<Props> = ({headerRight, headerLeft}) => {
         {/* desktop header left */}
         <div className="header-left">{headerLeft}</div>
         {/* desktop header right */}
-        <div className="header-right">{typeof error === 'string' ? error : ""}</div>
+        <div className="header-right">{rightContent}</div>
       </header>
         )
 }
